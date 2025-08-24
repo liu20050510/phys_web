@@ -1,0 +1,37 @@
+{
+  "name": "showphys",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --fix",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@ffmpeg/core": "^0.12.10",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "axios": "^1.8.1",
+    "echarts": "^5.6.0",
+    "element-plus": "^2.9.4",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "pinia": "^2.3.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.18.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "sass": "^1.85.0",
+    "unplugin-auto-import": "^19.1.0",
+    "unplugin-vue-components": "^28.1.0",
+    "vite": "^6.0.11",
+    "vite-plugin-vue-devtools": "^7.7.1"
+  }
+}

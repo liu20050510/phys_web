@@ -1,0 +1,48 @@
+BASE: ['']
+#TOOLBOX_MODE: "only_test"      # 只进行推理
+TOOLBOX_MODE: "inference"      # 只进行推理
+TEST:
+  OUTPUT_SAVE_DIR: "./videoPredictions/"
+  METRICS: ['AU']            # 由于不进行测试评估，所以不需要计算 MAE、RMSE 等指标
+  USE_LAST_EPOCH: False
+  DATA:
+    FS: 30                     # 采样率
+    DATASET: "SingleVideo"      # 仅用于标识，表示输入是单个视频
+    DO_PREPROCESS: True         # 仍然进行预处理（裁剪人脸、调整大小）
+    DATA_FORMAT: NDCHW
+    DATA_PATH: "./new/"  # 需要修改为你的单个视频文件夹路径
+    CACHED_PATH: "./SingleVideoCache/"      # 可选，若需缓存处理过的数据
+    EXP_DATA_NAME: ""
+    BEGIN: 0.0
+    END: 1.0
+    PREPROCESS:
+      DATA_TYPE: ['Standardized']
+      LABEL_TYPE: None          # 不需要 ground truth
+      DO_CHUNK: True
+#      CHUNK_LENGTH: 160
+      CHUNK_LENGTH: 10
+      CROP_FACE:
+        DO_CROP_FACE: True
+        USE_LARGE_FACE_BOX: True
+        LARGE_BOX_COEF: 1.5
+        DETECTION:
+          DO_DYNAMIC_DETECTION: False
+          DYNAMIC_DETECTION_FREQUENCY: 30
+          USE_MEDIAN_FACE_BOX: False
+      RESIZE:
+        H: 128
+        W: 128
+DEVICE: cuda:0
+NUM_OF_GPU_TRAIN: 1
+LOG:
+  PATH: runs/exp
+MODEL:
+  DROP_RATE: 0.2
+  NAME: RhythmMamba
+INFERENCE:
+  BATCH_SIZE: 4
+  EVALUATION_METHOD: "FFT"      # 选择使用 FFT 进行推理
+  EVALUATION_WINDOW:
+    USE_SMALLER_WINDOW: False
+    WINDOW_SIZE: 10
+  MODEL_PATH: "/mnt/d/DaChuang/Biology/web/backend/rPPG-main/PreTrainedModels/UBFC_cross_RhythmMamba.pth"  # 需要确认路径
